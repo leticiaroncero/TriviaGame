@@ -27,29 +27,7 @@ var questionnaire = [
 ];
 
 $("#start-button").click(function () {
-    $("#quiz-content").empty()
-    var currentQuestion = $('<div></div>')
-    var optionOne = $('<div></div>')
-    var optionTwo = $('<div></div>')
-    var optionThree = $('<div></div>')
-    var optionFour = $('<div></div>')
-
-    optionOne.addClass('answer')
-    optionTwo.addClass('answer')
-    optionThree.addClass('answer')
-    optionFour.addClass('answer')
-
-    currentQuestion.text(questionnaire[0].question)
-    optionOne.text(questionnaire[0].answers[0])
-    optionTwo.text(questionnaire[0].answers[1])
-    optionThree.text(questionnaire[0].answers[2])
-    optionFour.text(questionnaire[0].answers[3])
-
-    $("#quiz-content").append(currentQuestion)
-    $("#quiz-content").append(optionOne)
-    $("#quiz-content").append(optionTwo)
-    $("#quiz-content").append(optionThree)
-    $("#quiz-content").append(optionFour)
+    showQuestion(questionnaire[0])
 
     $('.answer').click(function () {
         var userAnswer = $(this).text()
@@ -71,10 +49,33 @@ $("#start-button").click(function () {
         validation.text("Nope!")
         displayAnswer.text("The correct answer was: " + questionnaire[0].correctAnswer)
         gifImage.attr('src', 'assets/images/olsen_nod.gif')
-
-
-
     })
 })
 
 
+function showQuestion(quizObj) {
+    $("#quiz-content").empty()
+
+    var currentQuestion = $('<div></div>')
+    var optionOne = $('<div></div>')
+    var optionTwo = $('<div></div>')
+    var optionThree = $('<div></div>')
+    var optionFour = $('<div></div>')
+
+    optionOne.addClass('answer')
+    optionTwo.addClass('answer')
+    optionThree.addClass('answer')
+    optionFour.addClass('answer')
+
+    currentQuestion.text(quizObj.question)
+    optionOne.text(quizObj.answers[0])
+    optionTwo.text(quizObj.answers[1])
+    optionThree.text(quizObj.answers[2])
+    optionFour.text(quizObj.answers[3])
+
+    $("#quiz-content").append(currentQuestion)
+    $("#quiz-content").append(optionOne)
+    $("#quiz-content").append(optionTwo)
+    $("#quiz-content").append(optionThree)
+    $("#quiz-content").append(optionFour)
+}
