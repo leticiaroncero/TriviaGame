@@ -27,6 +27,7 @@ var questionnaire = [
 
 ];
 
+
 $("#start-button").click(function () {
     $("#quiz-content").empty()
     var currentQuestion = $('<div></div>')
@@ -34,6 +35,11 @@ $("#start-button").click(function () {
     var optionTwo = $('<div></div>')
     var optionThree = $('<div></div>')
     var optionFour = $('<div></div>')
+
+    optionOne.addClass('answer')
+    optionTwo.addClass('answer')
+    optionThree.addClass('answer')
+    optionFour.addClass('answer')
 
     currentQuestion.text(questionnaire[0].question)
     optionOne.text(questionnaire[0].answers[0])
@@ -46,14 +52,15 @@ $("#start-button").click(function () {
     $("#quiz-content").append(optionTwo)
     $("#quiz-content").append(optionThree)
     $("#quiz-content").append(optionFour)
+
+    $('.answer').click(function () {
+        var userAnswer = $(this).text()
+        if (userAnswer === questionnaire[0].correctAnswer) {
+            console.log("correct!")
+        } else {
+            console.log("incorrect")
+        }  
+    })
 })
-
-
-
-
-
-
-
-
 
 
