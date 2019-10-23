@@ -26,29 +26,22 @@ var questionnaire = [
     }
 ];
 
+var correctAnswers = 0;
+var incorrectAnswers = 0;
+var unanswered = 0;
+
 $("#start-button").click(function () {
     showQuestion(questionnaire[0])
 
     $('.answer').click(function () {
         var userAnswer = $(this).text()
         if (userAnswer === questionnaire[0].correctAnswer) {
-            console.log("correct!")
+            rightAnswer(questionnaire[0])
+            correctAnswers++
         } else {
-            console.log("incorrect")
+            wrongAnswer(questionnaire[0])
+            incorrectAnswers++
         }
-
-        $("#quiz-content").empty()
-        var validation = $('<div></div>')
-        var displayAnswer = $('<div></div>')
-        var gifImage = $('<img></img>')
-
-        $("#quiz-content").append(validation)
-        $("#quiz-content").append(displayAnswer)
-        $("#quiz-content").append(gifImage)
-
-        validation.text("Nope!")
-        displayAnswer.text("The correct answer was: " + questionnaire[0].correctAnswer)
-        gifImage.attr('src', 'assets/images/olsen_nod.gif')
     })
 })
 
@@ -78,4 +71,31 @@ function showQuestion(quizObj) {
     $("#quiz-content").append(optionTwo)
     $("#quiz-content").append(optionThree)
     $("#quiz-content").append(optionFour)
+}
+
+function wrongAnswer(quizObj) {
+    $("#quiz-content").empty()
+    var validation = $('<div></div>')
+    var displayAnswer = $('<div></div>')
+    var gifImage = $('<img></img>')
+
+    $("#quiz-content").append(validation)
+    $("#quiz-content").append(displayAnswer)
+    $("#quiz-content").append(gifImage)
+
+    validation.text("Nope!")
+    displayAnswer.text("The correct answer was: " + quizObj.correctAnswer)
+    gifImage.attr('src', 'assets/images/olsen_nod.gif')
+}
+
+function rightAnswer(quizObj) {
+    $("#quiz-content").empty()
+    var validation = $('<div></div>')
+    var gifImage = $('<img></img>')
+
+    $("#quiz-content").append(validation)
+    $("#quiz-content").append(gifImage)
+
+    validation.text("Correct!")
+    gifImage.attr('src', 'assets/images/olsen_nod.gif')
 }
