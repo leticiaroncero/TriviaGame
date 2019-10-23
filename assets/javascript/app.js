@@ -1,33 +1,52 @@
 var questionnaire = [
     {
         question: "Which is the correct term for Identical Twins?",
-        answerOptions: ["Monochorionic", "Monozygotic", "Dizygotic", "Polyzygotic"],
-        validAnswer: "Monozygotic"
+        answers: ["Monochorionic", "Monozygotic", "Dizygotic", "Polyzygotic"],
+        correctAnswer: "Monozygotic"
     },
     {
         question: "How many twins are born each year in the US?",
-        answerOptions: ["33.4 per 1,000 live births", "41.3 per 1,000 live births", "29.6 per 1,000 live births", "23.9 per 1,000 live births"],
-        validAnswer: "33.4 per 1,000 live births"
+        answers: ["33.4 per 1,000 live births", "41.3 per 1,000 live births", "29.6 per 1,000 live births", "23.9 per 1,000 live births"],
+        correctAnswer: "33.4 per 1,000 live births"
     },
     {
         question: "Which state has the highest rate of twin births in the US?",
-        answerOptions: ["Illinois", "California", "New York", "Connecticut"],
-        validAnswer: "Connecticut"
+        answers: ["Illinois", "California", "New York", "Connecticut"],
+        correctAnswer: "Connecticut"
     },
     {
         question: "What is the origin of the word 'twin'?",
-        answerOptions: ["German", "Greek", "Latin", "Unknown"],
-        validAnswer: "German"
+        answers: ["German", "Greek", "Latin", "Unknown"],
+        correctAnswer: "German"
     },
     {
         question: "Which celebrity has a twin sibling?",
         answerOptions: ["Madonna", "Tom Cruise", "Scarlett Johansson", "Ariana Grande"],
-        validAnswer: "Scarlett Johansson"
+        correctAnswer: "Scarlett Johansson"
     }
 
 ];
 
+$("#start-button").click(function () {
+    $("#quiz-content").empty()
+    var currentQuestion = $('<div></div>')
+    var optionOne = $('<div></div>')
+    var optionTwo = $('<div></div>')
+    var optionThree = $('<div></div>')
+    var optionFour = $('<div></div>')
 
+    currentQuestion.text(questionnaire[0].question)
+    optionOne.text(questionnaire[0].answers[0])
+    optionTwo.text(questionnaire[0].answers[1])
+    optionThree.text(questionnaire[0].answers[2])
+    optionFour.text(questionnaire[0].answers[3])
+
+    $("#quiz-content").append(currentQuestion)
+    $("#quiz-content").append(optionOne)
+    $("#quiz-content").append(optionTwo)
+    $("#quiz-content").append(optionThree)
+    $("#quiz-content").append(optionFour)
+})
 
 
 
