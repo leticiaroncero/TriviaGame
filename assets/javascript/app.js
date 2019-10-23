@@ -24,9 +24,7 @@ var questionnaire = [
         answerOptions: ["Madonna", "Tom Cruise", "Scarlett Johansson", "Ariana Grande"],
         correctAnswer: "Scarlett Johansson"
     }
-
 ];
-
 
 $("#start-button").click(function () {
     $("#quiz-content").empty()
@@ -59,7 +57,23 @@ $("#start-button").click(function () {
             console.log("correct!")
         } else {
             console.log("incorrect")
-        }  
+        }
+
+        $("#quiz-content").empty()
+        var validation = $('<div></div>')
+        var displayAnswer = $('<div></div>')
+        var gifImage = $('<img></img>')
+
+        $("#quiz-content").append(validation)
+        $("#quiz-content").append(displayAnswer)
+        $("#quiz-content").append(gifImage)
+
+        validation.text("Nope!")
+        displayAnswer.text("The correct answer was: " + questionnaire[0].correctAnswer)
+        gifImage.attr('src', 'assets/images/olsen_nod.gif')
+
+
+
     })
 })
 
