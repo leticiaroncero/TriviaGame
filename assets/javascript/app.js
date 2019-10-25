@@ -26,12 +26,21 @@ var questionnaire = [
     }
 ];
 
+var timeRemaining = 30;
 var correctAnswers = 0;
 var incorrectAnswers = 0;
 var unanswered = 0;
+var timeRemainingLoc = $('<span></span>').text("Time remaining: " + timeRemaining)
 
 $("#start-button").click(function () {
+
     showQuestion(questionnaire[0])
+
+    $("#time-remaining").append(timeRemainingLoc)
+    setInterval(function () {
+        timeRemaining--;
+        timeRemainingLoc.text("Time remaining: " + timeRemaining)
+    }, 1000)
 
     $('.answer').click(function () {
         var userAnswer = $(this).text()
