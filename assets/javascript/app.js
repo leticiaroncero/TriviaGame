@@ -31,6 +31,7 @@ var correctAnswers = 0;
 var incorrectAnswers = 0;
 var unanswered = 0;
 var timeRemainingLoc = $('<span></span>')
+var currentQuestion = 0;
 
 $("#start-button").click(function () {
 
@@ -45,7 +46,7 @@ $("#start-button").click(function () {
 function showQuestion(quizObj) {
     $("#quiz-content").empty()
 
-    var currentQuestion = $('<div></div>')
+    var question = $('<div></div>')
     var optionOne = $('<div></div>')
     var optionTwo = $('<div></div>')
     var optionThree = $('<div></div>')
@@ -56,13 +57,13 @@ function showQuestion(quizObj) {
     optionThree.addClass('answer')
     optionFour.addClass('answer')
 
-    currentQuestion.text(quizObj.question)
+    question.text(quizObj.question)
     optionOne.text(quizObj.answers[0])
     optionTwo.text(quizObj.answers[1])
     optionThree.text(quizObj.answers[2])
     optionFour.text(quizObj.answers[3])
 
-    $("#quiz-content").append(currentQuestion)
+    $("#quiz-content").append(question)
     $("#quiz-content").append(optionOne)
     $("#quiz-content").append(optionTwo)
     $("#quiz-content").append(optionThree)
@@ -72,7 +73,7 @@ function showQuestion(quizObj) {
 function startQuestion(quizObj) {
     timeRemaining = 30
     timeRemainingLoc.text("Time remaining: " + timeRemaining)
-    
+
     var countdown = setInterval(function () {
         timeRemaining--;
         timeRemainingLoc.text("Time remaining: " + timeRemaining)
@@ -109,9 +110,11 @@ function wrongAnswer(quizObj) {
     displayAnswer.text("The correct answer was: " + quizObj.correctAnswer)
     gifImage.attr('src', 'assets/images/olsen_nod.gif')
 
+    currentQuestion++
+
     setTimeout(function () {
-        showQuestion(questionnaire[1])
-        startQuestion(questionnaire[1])
+        showQuestion(questionnaire[currentQuestion])
+        startQuestion(questionnaire[currentQuestion])
     }, 3000)
 }
 
@@ -126,9 +129,11 @@ function rightAnswer() {
     validation.text("Correct!")
     gifImage.attr('src', 'assets/images/olsen_nod.gif')
 
+    currentQuestion++
+
     setTimeout(function () {
-        showQuestion(questionnaire[1])
-        startQuestion(questionnaire[1])
+        showQuestion(questionnaire[currentQuestion])
+        startQuestion(questionnaire[currentQuestion])
     }, 3000)
 }
 
@@ -146,8 +151,10 @@ function timeout(quizObj) {
     displayAnswer.text("The correct answer was: " + quizObj.correctAnswer)
     gifImage.attr('src', 'assets/images/surprised.gif')
 
+    currentQuestion++
+
     setTimeout(function () {
-        showQuestion(questionnaire[1])
-        startQuestion(questionnaire[1])
+        showQuestion(questionnaire[currentQuestion])
+        startQuestion(questionnaire[currentQuestion])
     }, 3000)
 }
