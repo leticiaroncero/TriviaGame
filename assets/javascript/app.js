@@ -30,34 +30,15 @@ var timeRemaining = 30;
 var correctAnswers = 0;
 var incorrectAnswers = 0;
 var unanswered = 0;
-var timeRemainingLoc = $('<span></span>').text("Time remaining: " + timeRemaining)
+var timeRemainingLoc = $('<span></span>')
 
 $("#start-button").click(function () {
 
-    showQuestion(questionnaire[0])
-
     $("#time-remaining").append(timeRemainingLoc)
+    
+    showQuestion(questionnaire[0])
+    startQuestion(questionnaire[0])
 
-    var countdown = setInterval(function () {
-        timeRemaining--;
-        timeRemainingLoc.text("Time remaining: " + timeRemaining)
-        if (timeRemaining === 0) {
-            clearInterval(countdown)
-            timeout(questionnaire[0])
-        }
-    }, 1000)
-
-    $('.answer').click(function () {
-        clearInterval(countdown)
-        var userAnswer = $(this).text()
-        if (userAnswer === questionnaire[0].correctAnswer) {
-            rightAnswer()
-            correctAnswers++
-        } else {
-            wrongAnswer(questionnaire[0])
-            incorrectAnswers++
-        }
-    })
 })
 
 
@@ -88,6 +69,32 @@ function showQuestion(quizObj) {
     $("#quiz-content").append(optionFour)
 }
 
+function startQuestion(quizObj) {
+    timeRemaining = 30
+    timeRemainingLoc.text("Time remaining: " + timeRemaining)
+    
+    var countdown = setInterval(function () {
+        timeRemaining--;
+        timeRemainingLoc.text("Time remaining: " + timeRemaining)
+        if (timeRemaining === 0) {
+            clearInterval(countdown)
+            timeout(quizObj)
+        }
+    }, 1000)
+
+    $('.answer').click(function () {
+        clearInterval(countdown)
+        var userAnswer = $(this).text()
+        if (userAnswer === quizObj.correctAnswer) {
+            rightAnswer()
+            correctAnswers++
+        } else {
+            wrongAnswer(quizObj)
+            incorrectAnswers++
+        }
+    })
+}
+
 function wrongAnswer(quizObj) {
     $("#quiz-content").empty()
     var validation = $('<div></div>')
@@ -101,6 +108,11 @@ function wrongAnswer(quizObj) {
     validation.text("Nope!")
     displayAnswer.text("The correct answer was: " + quizObj.correctAnswer)
     gifImage.attr('src', 'assets/images/olsen_nod.gif')
+
+    setTimeout(function () {
+        showQuestion(questionnaire[1])
+        startQuestion(questionnaire[1])
+    }, 3000)
 }
 
 function rightAnswer() {
@@ -113,6 +125,11 @@ function rightAnswer() {
 
     validation.text("Correct!")
     gifImage.attr('src', 'assets/images/olsen_nod.gif')
+
+    setTimeout(function () {
+        showQuestion(questionnaire[1])
+        startQuestion(questionnaire[1])
+    }, 3000)
 }
 
 function timeout(quizObj) {
@@ -128,4 +145,9 @@ function timeout(quizObj) {
     validation.text("Out of time!")
     displayAnswer.text("The correct answer was: " + quizObj.correctAnswer)
     gifImage.attr('src', 'assets/images/surprised.gif')
+
+    setTimeout(function () {
+        showQuestion(questionnaire[1])
+        startQuestion(questionnaire[1])
+    }, 3000)
 }
