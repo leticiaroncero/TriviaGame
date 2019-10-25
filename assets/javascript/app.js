@@ -37,15 +37,20 @@ $("#start-button").click(function () {
     showQuestion(questionnaire[0])
 
     $("#time-remaining").append(timeRemainingLoc)
-    setInterval(function () {
+
+    var countdown = setInterval(function () {
         timeRemaining--;
         timeRemainingLoc.text("Time remaining: " + timeRemaining)
+        if (timeRemaining === 0) {
+            clearInterval(countdown)
+            timeout(questionnaire[0])
+        }
     }, 1000)
 
     $('.answer').click(function () {
         var userAnswer = $(this).text()
         if (userAnswer === questionnaire[0].correctAnswer) {
-            rightAnswer(questionnaire[0])
+            rightAnswer()
             correctAnswers++
         } else {
             wrongAnswer(questionnaire[0])
@@ -97,7 +102,7 @@ function wrongAnswer(quizObj) {
     gifImage.attr('src', 'assets/images/olsen_nod.gif')
 }
 
-function rightAnswer(quizObj) {
+function rightAnswer() {
     $("#quiz-content").empty()
     var validation = $('<div></div>')
     var gifImage = $('<img></img>')
@@ -107,4 +112,19 @@ function rightAnswer(quizObj) {
 
     validation.text("Correct!")
     gifImage.attr('src', 'assets/images/olsen_nod.gif')
+}
+
+function timeout(quizObj) {
+    $("#quiz-content").empty()
+    var validation = $('<div></div>')
+    var displayAnswer = $('<div></div>')
+    var gifImage = $('<img></img>')
+
+    $("#quiz-content").append(validation)
+    $("#quiz-content").append(displayAnswer)
+    $("#quiz-content").append(gifImage)
+
+    validation.text("Out of time!")
+    displayAnswer.text("The correct answer was: " + quizObj.correctAnswer)
+    gifImage.attr('src', 'assets/images/surprised.gif')
 }
