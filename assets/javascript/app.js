@@ -48,6 +48,7 @@ $("#start-button").click(function () {
     }, 1000)
 
     $('.answer').click(function () {
+        clearInterval(countdown)
         var userAnswer = $(this).text()
         if (userAnswer === questionnaire[0].correctAnswer) {
             rightAnswer()
