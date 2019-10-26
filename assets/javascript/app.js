@@ -37,6 +37,7 @@ var answerGifs = [
     "assets/images/fall.gif",
     "assets/images/spiderman.gif",
     "assets/images/olsen.gif",
+    "assets/images/pacifier.gif",
 ]
 
 var timeRemaining = 30;
@@ -125,16 +126,7 @@ function wrongAnswer(quizObj) {
     displayAnswer.text("The correct answer was: " + quizObj.correctAnswer)
     gifImage.attr('src', answerGifs[currentQuestion])
 
-    currentQuestion++
-
-    if (currentQuestion >= questionnaire.length) {
-        showResults()
-    } else {
-        setTimeout(function () {
-            showQuestion(questionnaire[currentQuestion])
-            startQuestion(questionnaire[currentQuestion])
-        }, 3000)
-    }
+    nextQuestion()
 }
 
 function rightAnswer() {
@@ -148,16 +140,7 @@ function rightAnswer() {
     validation.text("Correct!")
     gifImage.attr('src', answerGifs[currentQuestion])
 
-    currentQuestion++
-
-    if (currentQuestion >= questionnaire.length) {
-        showResults()
-    } else {
-        setTimeout(function () {
-            showQuestion(questionnaire[currentQuestion])
-            startQuestion(questionnaire[currentQuestion])
-        }, 3000)
-    }
+    nextQuestion()
 }
 
 function timeout(quizObj) {
@@ -174,16 +157,21 @@ function timeout(quizObj) {
     displayAnswer.text("The correct answer was: " + quizObj.correctAnswer)
     gifImage.attr('src', answerGifs[currentQuestion])
 
+    nextQuestion()
+}
+
+function nextQuestion() {
     currentQuestion++
 
-    if (currentQuestion >= questionnaire.length) {
-        showResults()
-    } else {
-        setTimeout(function () {
+    setTimeout(function () {
+        if (currentQuestion >= questionnaire.length) {
+            showResults()
+        } else {
             showQuestion(questionnaire[currentQuestion])
             startQuestion(questionnaire[currentQuestion])
-        }, 3000)
-    }
+        }
+    }, 3000)
+
 }
 
 function showResults() {
