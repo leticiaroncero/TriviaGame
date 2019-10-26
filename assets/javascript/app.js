@@ -21,7 +21,7 @@ var questionnaire = [
     },
     {
         question: "Which celebrity has a twin sibling?",
-        answerOptions: ["Madonna", "Tom Cruise", "Scarlett Johansson", "Ariana Grande"],
+        answers: ["Madonna", "Tom Cruise", "Scarlett Johansson", "Ariana Grande"],
         correctAnswer: "Scarlett Johansson"
     }
 ];
@@ -30,15 +30,15 @@ var timeRemaining = 30;
 var correctAnswers = 0;
 var incorrectAnswers = 0;
 var unanswered = 0;
-var timeRemainingLoc = $('<span></span>')
+var timeRemainingLoc = $('<span></span>');
 var currentQuestion = 0;
 
 $("#start-button").click(function () {
 
     $("#time-remaining").append(timeRemainingLoc)
-    
-    showQuestion(questionnaire[0])
-    startQuestion(questionnaire[0])
+
+    showQuestion(questionnaire[currentQuestion])
+    startQuestion(questionnaire[currentQuestion])
 
 })
 
@@ -78,6 +78,7 @@ function startQuestion(quizObj) {
         timeRemaining--;
         timeRemainingLoc.text("Time remaining: " + timeRemaining)
         if (timeRemaining === 0) {
+            unanswered++
             clearInterval(countdown)
             timeout(quizObj)
         }
@@ -87,13 +88,14 @@ function startQuestion(quizObj) {
         clearInterval(countdown)
         var userAnswer = $(this).text()
         if (userAnswer === quizObj.correctAnswer) {
-            rightAnswer()
             correctAnswers++
+            rightAnswer()
+
         } else {
-            wrongAnswer(quizObj)
             incorrectAnswers++
+            wrongAnswer(quizObj)
         }
-    })
+    })  
 }
 
 function wrongAnswer(quizObj) {
@@ -112,10 +114,14 @@ function wrongAnswer(quizObj) {
 
     currentQuestion++
 
-    setTimeout(function () {
-        showQuestion(questionnaire[currentQuestion])
-        startQuestion(questionnaire[currentQuestion])
-    }, 3000)
+    if (currentQuestion >= questionnaire.length) {
+        showResults()
+    } else {
+        setTimeout(function () {
+            showQuestion(questionnaire[currentQuestion])
+            startQuestion(questionnaire[currentQuestion])
+        }, 3000)
+    }
 }
 
 function rightAnswer() {
@@ -131,10 +137,14 @@ function rightAnswer() {
 
     currentQuestion++
 
-    setTimeout(function () {
-        showQuestion(questionnaire[currentQuestion])
-        startQuestion(questionnaire[currentQuestion])
-    }, 3000)
+    if (currentQuestion >= questionnaire.length) {
+        showResults()
+    } else {
+        setTimeout(function () {
+            showQuestion(questionnaire[currentQuestion])
+            startQuestion(questionnaire[currentQuestion])
+        }, 3000)
+    }
 }
 
 function timeout(quizObj) {
@@ -153,8 +163,44 @@ function timeout(quizObj) {
 
     currentQuestion++
 
-    setTimeout(function () {
+    if (currentQuestion >= questionnaire.length) {
+        showResults()
+    } else {
+        setTimeout(function () {
+            showQuestion(questionnaire[currentQuestion])
+            startQuestion(questionnaire[currentQuestion])
+        }, 3000)
+    }
+}
+
+function showResults() {
+    $("#quiz-content").empty()
+    var validation = $('<div></div>')
+    var totalCorrect = $('<div></div>')
+    var totalIncorrect = $('<div></div>')
+    var totalUnanswered = $('<div></div>')
+    var startOver = $('<button></button>')
+
+    $("#quiz-content").append(validation)
+    $("#quiz-content").append(totalCorrect)
+    $("#quiz-content").append(totalIncorrect)
+    $("#quiz-content").append(totalUnanswered)
+    $("#quiz-content").append(startOver)
+
+    validation.text("All done, here's how you did!")
+    totalCorrect.text(correctAnswers)
+    totalIncorrect.text(incorrectAnswers)
+    totalUnanswered.text(unanswered)
+    startOver.text("Start Over?")
+
+    $(startOver).click(function () {
+        currentQuestion = 0
+        correctAnswers = 0
+        incorrectAnswers = 0
+        unanswered = 0
+
+        $("#time-remaining").append(timeRemainingLoc)
         showQuestion(questionnaire[currentQuestion])
         startQuestion(questionnaire[currentQuestion])
-    }, 3000)
+    })
 }
