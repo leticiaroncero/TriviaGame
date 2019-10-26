@@ -61,15 +61,15 @@ function showQuestion(quizObj) {
     $("#quiz-content").empty()
 
     var question = $('<div></div>')
-    var optionOne = $('<div></div>')
-    var optionTwo = $('<div></div>')
-    var optionThree = $('<div></div>')
-    var optionFour = $('<div></div>')
+    var optionOne = $('<button></button>')
+    var optionTwo = $('<button></button>')
+    var optionThree = $('<button></button>')
+    var optionFour = $('<button></button>')
 
-    optionOne.addClass('answer')
-    optionTwo.addClass('answer')
-    optionThree.addClass('answer')
-    optionFour.addClass('answer')
+    optionOne.addClass('answer btn btn-info')
+    optionTwo.addClass('answer btn btn-info')
+    optionThree.addClass('answer btn btn-info')
+    optionFour.addClass('answer btn btn-info')
 
     question.text(quizObj.question)
     optionOne.text(quizObj.answers[0])
@@ -189,10 +189,12 @@ function showResults() {
     $("#quiz-content").append(startOver)
 
     validation.text("All done, here's how you did!")
-    totalCorrect.text(correctAnswers)
-    totalIncorrect.text(incorrectAnswers)
-    totalUnanswered.text(unanswered)
+    totalCorrect.text("Correct Answers: " + correctAnswers)
+    totalIncorrect.text("Incorrect Answers: " + incorrectAnswers)
+    totalUnanswered.text("Unanswered: " + unanswered)
     startOver.text("Start Over?")
+
+    startOver.addClass('btn btn-info')
 
     $(startOver).click(function () {
         currentQuestion = 0
