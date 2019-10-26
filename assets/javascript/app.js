@@ -31,6 +31,14 @@ var questionnaire = [
     },
 ];
 
+var answerGifs = [
+    "assets/images/sneeze.gif",
+    "assets/images/surprised.gif",
+    "assets/images/fall.gif",
+    "assets/images/spiderman.gif",
+    "assets/images/olsen.gif",
+]
+
 var timeRemaining = 30;
 var correctAnswers = 0;
 var incorrectAnswers = 0;
@@ -115,7 +123,7 @@ function wrongAnswer(quizObj) {
 
     validation.text("Nope!")
     displayAnswer.text("The correct answer was: " + quizObj.correctAnswer)
-    gifImage.attr('src', 'assets/images/olsen_nod.gif')
+    gifImage.attr('src', answerGifs[currentQuestion])
 
     currentQuestion++
 
@@ -138,7 +146,7 @@ function rightAnswer() {
     $("#quiz-content").append(gifImage)
 
     validation.text("Correct!")
-    gifImage.attr('src', 'assets/images/olsen_nod.gif')
+    gifImage.attr('src', answerGifs[currentQuestion])
 
     currentQuestion++
 
@@ -164,7 +172,7 @@ function timeout(quizObj) {
 
     validation.text("Out of time!")
     displayAnswer.text("The correct answer was: " + quizObj.correctAnswer)
-    gifImage.attr('src', 'assets/images/surprised.gif')
+    gifImage.attr('src', answerGifs[currentQuestion])
 
     currentQuestion++
 
