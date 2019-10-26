@@ -23,7 +23,12 @@ var questionnaire = [
         question: "Which celebrity has a twin sibling?",
         answers: ["Madonna", "Tom Cruise", "Scarlett Johansson", "Ariana Grande"],
         correctAnswer: "Scarlett Johansson"
-    }
+    },
+    {
+        question: "What is the general incidence of twins in the United States among spontaneous pregnancies?",
+        answers: ["1 in 25 pregnancies", "1 in 50 pregnancies", "1 in 80 pregnancies", "1 in 150 pregnancies"],
+        correctAnswer: "1 in 80 pregnancies"
+    },
 ];
 
 var timeRemaining = 30;
@@ -95,7 +100,7 @@ function startQuestion(quizObj) {
             incorrectAnswers++
             wrongAnswer(quizObj)
         }
-    })  
+    })
 }
 
 function wrongAnswer(quizObj) {
