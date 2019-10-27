@@ -38,7 +38,7 @@ var answerGifs = [
     "assets/images/spiderman.gif",
     "assets/images/olsen.gif",
     "assets/images/pacifier.gif",
-]
+];
 
 var timeRemaining = 30;
 var correctAnswers = 0;
@@ -49,167 +49,166 @@ var currentQuestion = 0;
 
 $("#start-button").click(function () {
 
-    $("#time-remaining").append(timeRemainingLoc)
+    $("#time-remaining").append(timeRemainingLoc);
 
-    showQuestion(questionnaire[currentQuestion])
-    startQuestion(questionnaire[currentQuestion])
+    showQuestion(questionnaire[currentQuestion]);
+    startQuestion(questionnaire[currentQuestion]);
 
-})
+});
 
 
 function showQuestion(quizObj) {
-    $("#quiz-content").empty()
+    $("#quiz-content").empty();
 
-    var question = $('<div></div>')
-    var optionOne = $('<button></button>')
-    var optionTwo = $('<button></button>')
-    var optionThree = $('<button></button>')
-    var optionFour = $('<button></button>')
+    var question = $('<div></div>');
+    var optionOne = $('<button></button>');
+    var optionTwo = $('<button></button>');
+    var optionThree = $('<button></button>');
+    var optionFour = $('<button></button>');
 
-    optionOne.addClass('answer btn btn-info')
-    optionTwo.addClass('answer btn btn-info')
-    optionThree.addClass('answer btn btn-info')
-    optionFour.addClass('answer btn btn-info')
+    optionOne.addClass('answer btn btn-info');
+    optionTwo.addClass('answer btn btn-info');
+    optionThree.addClass('answer btn btn-info');
+    optionFour.addClass('answer btn btn-info');
 
-    question.text(quizObj.question)
-    optionOne.text(quizObj.answers[0])
-    optionTwo.text(quizObj.answers[1])
-    optionThree.text(quizObj.answers[2])
-    optionFour.text(quizObj.answers[3])
+    question.text(quizObj.question);
+    optionOne.text(quizObj.answers[0]);
+    optionTwo.text(quizObj.answers[1]);
+    optionThree.text(quizObj.answers[2]);
+    optionFour.text(quizObj.answers[3]);
 
-    $("#quiz-content").append(question)
-    $("#quiz-content").append(optionOne)
-    $("#quiz-content").append(optionTwo)
-    $("#quiz-content").append(optionThree)
-    $("#quiz-content").append(optionFour)
+    $("#quiz-content").append(question);
+    $("#quiz-content").append(optionOne);
+    $("#quiz-content").append(optionTwo);
+    $("#quiz-content").append(optionThree);
+    $("#quiz-content").append(optionFour);
 }
 
 function startQuestion(quizObj) {
-    timeRemaining = 30
-    timeRemainingLoc.text("Time remaining: " + timeRemaining)
+    timeRemaining = 30;
+    timeRemainingLoc.text("Time remaining: " + timeRemaining);
 
     var countdown = setInterval(function () {
         timeRemaining--;
-        timeRemainingLoc.text("Time remaining: " + timeRemaining)
+        timeRemainingLoc.text("Time remaining: " + timeRemaining);
         if (timeRemaining === 0) {
-            unanswered++
-            clearInterval(countdown)
-            timeout(quizObj)
+            unanswered++;
+            clearInterval(countdown);
+            timeout(quizObj);
         }
-    }, 1000)
+    }, 1000);
 
     $('.answer').click(function () {
-        clearInterval(countdown)
-        var userAnswer = $(this).text()
+        clearInterval(countdown);
+        var userAnswer = $(this).text();
         if (userAnswer === quizObj.correctAnswer) {
-            correctAnswers++
-            rightAnswer()
+            correctAnswers++;
+            rightAnswer();
 
         } else {
-            incorrectAnswers++
-            wrongAnswer(quizObj)
+            incorrectAnswers++;
+            wrongAnswer(quizObj);
         }
     })
 }
 
 function wrongAnswer(quizObj) {
-    $("#quiz-content").empty()
-    var validation = $('<p></p>')
-    var displayAnswer = $('<p></p>')
-    var gifImage = $('<img></img>')
+    $("#quiz-content").empty();
+    var validation = $('<p></p>');
+    var displayAnswer = $('<p></p>');
+    var gifImage = $('<img></img>');
 
-    $("#quiz-content").append(validation)
-    $("#quiz-content").append(displayAnswer)
-    $("#quiz-content").append(gifImage)
+    $("#quiz-content").append(validation);
+    $("#quiz-content").append(displayAnswer);
+    $("#quiz-content").append(gifImage);
 
-    validation.addClass("incorrect-answer")
+    validation.addClass("incorrect-answer");
 
-    validation.text("Nope!")
-    displayAnswer.text("The correct answer was: " + quizObj.correctAnswer)
-    gifImage.attr('src', answerGifs[currentQuestion])
+    validation.text("Nope!");
+    displayAnswer.text("The correct answer was: " + quizObj.correctAnswer);
+    gifImage.attr('src', answerGifs[currentQuestion]);
 
-    nextQuestion()
+    nextQuestion();
 }
 
 function rightAnswer() {
-    $("#quiz-content").empty()
-    var validation = $('<p></p>')
-    var gifImage = $('<img></img>')
+    $("#quiz-content").empty();
+    var validation = $('<p></p>');
+    var gifImage = $('<img></img>');
 
-    $("#quiz-content").append(validation)
-    $("#quiz-content").append(gifImage)
+    $("#quiz-content").append(validation);
+    $("#quiz-content").append(gifImage);
 
-    validation.addClass("correct-answer")
+    validation.addClass("correct-answer");
 
-    validation.text("Correct!")
-    gifImage.attr('src', answerGifs[currentQuestion])
+    validation.text("Correct!");
+    gifImage.attr('src', answerGifs[currentQuestion]);
 
-    nextQuestion()
+    nextQuestion();
 }
 
 function timeout(quizObj) {
-    $("#quiz-content").empty()
-    var validation = $('<p></p>')
-    var displayAnswer = $('<p></p>')
-    var gifImage = $('<img></img>')
+    $("#quiz-content").empty();
+    var validation = $('<p></p>');
+    var displayAnswer = $('<p></p>');
+    var gifImage = $('<img></img>');
 
-    $("#quiz-content").append(validation)
-    $("#quiz-content").append(displayAnswer)
-    $("#quiz-content").append(gifImage)
+    $("#quiz-content").append(validation);
+    $("#quiz-content").append(displayAnswer);
+    $("#quiz-content").append(gifImage);
 
-    validation.addClass("incorrect-answer")
+    validation.addClass("incorrect-answer");
 
-    validation.text("Out of time!")
-    displayAnswer.text("The correct answer was: " + quizObj.correctAnswer)
-    gifImage.attr('src', answerGifs[currentQuestion])
+    validation.text("Out of time!");
+    displayAnswer.text("The correct answer was: " + quizObj.correctAnswer);
+    gifImage.attr('src', answerGifs[currentQuestion]);
 
-    nextQuestion()
+    nextQuestion();
 }
 
 function nextQuestion() {
-    currentQuestion++
+    currentQuestion++;
 
     setTimeout(function () {
         if (currentQuestion >= questionnaire.length) {
-            showResults()
+            showResults();
         } else {
-            showQuestion(questionnaire[currentQuestion])
-            startQuestion(questionnaire[currentQuestion])
+            showQuestion(questionnaire[currentQuestion]);
+            startQuestion(questionnaire[currentQuestion]);
         }
-    }, 3000)
-
+    }, 3000);
 }
 
 function showResults() {
-    $("#quiz-content").empty()
-    var validation = $('<p></p>')
-    var totalCorrect = $('<p></p>')
-    var totalIncorrect = $('<p></p>')
-    var totalUnanswered = $('<p></p>')
-    var startOver = $('<button></button>')
+    $("#quiz-content").empty();
+    var validation = $('<p></p>');
+    var totalCorrect = $('<p></p>');
+    var totalIncorrect = $('<p></p>');
+    var totalUnanswered = $('<p></p>');
+    var startOver = $('<button></button>');
 
-    $("#quiz-content").append(validation)
-    $("#quiz-content").append(totalCorrect)
-    $("#quiz-content").append(totalIncorrect)
-    $("#quiz-content").append(totalUnanswered)
-    $("#quiz-content").append(startOver)
+    $("#quiz-content").append(validation);
+    $("#quiz-content").append(totalCorrect);
+    $("#quiz-content").append(totalIncorrect);
+    $("#quiz-content").append(totalUnanswered);
+    $("#quiz-content").append(startOver);
 
-    validation.text("All done, here's how you did!")
-    totalCorrect.text("Correct Answers: " + correctAnswers)
-    totalIncorrect.text("Incorrect Answers: " + incorrectAnswers)
-    totalUnanswered.text("Unanswered: " + unanswered)
-    startOver.text("Start Over?")
+    validation.text("All done, here's how you did!");
+    totalCorrect.text("Correct Answers: " + correctAnswers);
+    totalIncorrect.text("Incorrect Answers: " + incorrectAnswers);
+    totalUnanswered.text("Unanswered: " + unanswered);
+    startOver.text("Start Over?");
 
-    startOver.addClass('btn btn-info')
+    startOver.addClass('btn btn-info');
 
     $(startOver).click(function () {
-        currentQuestion = 0
-        correctAnswers = 0
-        incorrectAnswers = 0
-        unanswered = 0
+        currentQuestion = 0;
+        correctAnswers = 0;
+        incorrectAnswers = 0;
+        unanswered = 0;
 
-        $("#time-remaining").append(timeRemainingLoc)
-        showQuestion(questionnaire[currentQuestion])
-        startQuestion(questionnaire[currentQuestion])
+        $("#time-remaining").append(timeRemainingLoc);
+        showQuestion(questionnaire[currentQuestion]);
+        startQuestion(questionnaire[currentQuestion]);
     })
 }
