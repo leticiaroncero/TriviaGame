@@ -125,7 +125,7 @@ function wrongAnswer(quizObj) {
     validation.addClass("incorrect-answer");
 
     validation.text("Nope!");
-    displayAnswer.text("The correct answer was: " + quizObj.correctAnswer);
+    displayAnswer.html("The correct answer was: <b>" + quizObj.correctAnswer + "</b>");
     gifImage.attr('src', answerGifs[currentQuestion]);
 
     nextQuestion();
@@ -160,7 +160,7 @@ function timeout(quizObj) {
     validation.addClass("incorrect-answer");
 
     validation.text("Out of time!");
-    displayAnswer.text("The correct answer was: " + quizObj.correctAnswer);
+    displayAnswer.html("The correct answer was: <b>" + quizObj.correctAnswer + "</b>");
     gifImage.attr('src', answerGifs[currentQuestion]);
 
     nextQuestion();
