@@ -29,6 +29,11 @@ var questionnaire = [
         answers: ["1 in 25 pregnancies", "1 in 50 pregnancies", "1 in 80 pregnancies", "1 in 150 pregnancies"],
         correctAnswer: "1 in 80 pregnancies"
     },
+    {
+        question: "After how many weeks were the most premature twins born?",
+        answers: ["11 weeks", "22 weeks", "33 weeks", "44 weeks"],
+        correctAnswer: "22 weeks"
+    },
 ];
 
 var answerGifs = [
@@ -38,6 +43,7 @@ var answerGifs = [
     "assets/images/spiderman.gif",
     "assets/images/olsen.gif",
     "assets/images/pacifier.gif",
+    "assets/images/boys.gif",
 ];
 
 var timeRemaining = 30;
