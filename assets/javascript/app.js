@@ -199,7 +199,7 @@ function showResults() {
     $("#quiz-content").append(totalUnanswered);
     $("#quiz-content").append(startOver);
 
-    validation.text("All done, here's how you did!");
+    validation.html("<b>All done, here's how you did!</b>");
     totalCorrect.text("Correct Answers: " + correctAnswers);
     totalIncorrect.text("Incorrect Answers: " + incorrectAnswers);
     totalUnanswered.text("Unanswered: " + unanswered);
