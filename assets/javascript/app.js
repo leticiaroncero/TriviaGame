@@ -114,13 +114,15 @@ function startQuestion(quizObj) {
 
 function wrongAnswer(quizObj) {
     $("#quiz-content").empty()
-    var validation = $('<div></div>')
-    var displayAnswer = $('<div></div>')
+    var validation = $('<p></p>')
+    var displayAnswer = $('<p></p>')
     var gifImage = $('<img></img>')
 
     $("#quiz-content").append(validation)
     $("#quiz-content").append(displayAnswer)
     $("#quiz-content").append(gifImage)
+
+    validation.addClass("incorrect-answer")
 
     validation.text("Nope!")
     displayAnswer.text("The correct answer was: " + quizObj.correctAnswer)
@@ -131,11 +133,13 @@ function wrongAnswer(quizObj) {
 
 function rightAnswer() {
     $("#quiz-content").empty()
-    var validation = $('<div></div>')
+    var validation = $('<p></p>')
     var gifImage = $('<img></img>')
 
     $("#quiz-content").append(validation)
     $("#quiz-content").append(gifImage)
+
+    validation.addClass("correct-answer")
 
     validation.text("Correct!")
     gifImage.attr('src', answerGifs[currentQuestion])
@@ -145,13 +149,15 @@ function rightAnswer() {
 
 function timeout(quizObj) {
     $("#quiz-content").empty()
-    var validation = $('<div></div>')
-    var displayAnswer = $('<div></div>')
+    var validation = $('<p></p>')
+    var displayAnswer = $('<p></p>')
     var gifImage = $('<img></img>')
 
     $("#quiz-content").append(validation)
     $("#quiz-content").append(displayAnswer)
     $("#quiz-content").append(gifImage)
+
+    validation.addClass("incorrect-answer")
 
     validation.text("Out of time!")
     displayAnswer.text("The correct answer was: " + quizObj.correctAnswer)
@@ -176,10 +182,10 @@ function nextQuestion() {
 
 function showResults() {
     $("#quiz-content").empty()
-    var validation = $('<div></div>')
-    var totalCorrect = $('<div></div>')
-    var totalIncorrect = $('<div></div>')
-    var totalUnanswered = $('<div></div>')
+    var validation = $('<p></p>')
+    var totalCorrect = $('<p></p>')
+    var totalIncorrect = $('<p></p>')
+    var totalUnanswered = $('<p></p>')
     var startOver = $('<button></button>')
 
     $("#quiz-content").append(validation)

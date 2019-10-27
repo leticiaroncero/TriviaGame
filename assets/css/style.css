@@ -1,5 +1,6 @@
 body {
     background-image: url("../images/background.jpg");
+    font-size: 18px;
 }
 
 .container {
@@ -14,9 +15,28 @@ body {
 .answer {
     width: 300px;
     display: block;
-    margin-top: 10px;
+    margin: 10px auto;
 }
 
 img {
     height: 200px;
+}
+
+#start-button {
+    margin-top: 50px;
+}
+
+#time-remaining {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.incorrect-answer {
+    color: #D8000C;
+    font-weight: bold;
+}
+
+.correct-answer {
+    color: #008000;
+    font-weight: bold;
 }
